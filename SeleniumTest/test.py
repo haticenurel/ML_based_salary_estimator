@@ -4,15 +4,14 @@ import csv
 
 import pytest
 import pytest_check
+import selenium.webdriver.support.expected_conditions as EC
+
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-import selenium.webdriver.support.expected_conditions as EC
-
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium import webdriver
-
+from selenium.webdriver.chrome.options import Options
 
 BASE_URL = "https://www.glassdoor.com/Salaries/index.htm"
 SWE_URL = "https://www.glassdoor.com/Salary/Google-Software-Engineer-Salaries-E9079_D_KO7,24_P1.htm"
@@ -102,3 +101,25 @@ def convert_output_to_data():
 
     print("Conversion completed successfully.")
     
+def test_options():
+    options = Options()
+    options.headless = True
+    driver = webdriver.Chrome(options=options)
+
+    driver.get('https://www.glassdoor.com/Salaries/software-engineer-salary-SRCH_KO0,17_SDMC.htm')
+
+    # Now the page's JavaScript is executed by the browser
+    # You can access the full content of the page
+    page_source = driver.page_source
+    
+    #get all links on the page 
+    links = driver.find_elements(By.TAG_NAME, "a")
+    for link in links:
+        print(link.get_attribute("href"))
+        
+        
+
+    driver.quit()
+
+    assert "Example Domain" in page_source
+
