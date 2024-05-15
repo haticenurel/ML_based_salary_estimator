@@ -36,6 +36,8 @@ dataframe1.loc[(dataframe1["city"] != "İstanbul") & (dataframe1["city"] != 3), 
 # then find and assign 1 to istanbuls
 dataframe1.loc[dataframe1["city"] == "İstanbul", "city"] = 2
 
+dataframe1.loc[dataframe1["company"] != "Kurumsal", "company"] = 0
+dataframe1.loc[dataframe1["company"] == "Kurumsal", "company"] = 1
 
 # messss -----------------------------------------------------------------------
 # tech mapping starts ---------------
@@ -73,5 +75,5 @@ for techDF in techSearchList:
     dataframe1.loc[dataframe1["tech_stack"].str.contains(r''+techDF+'', na=False) == False, techDF] = False
 
 
-print(dataframe1)
+print(dataframe1[30:50])
 # mess ends---------------------------------------------------------------------
