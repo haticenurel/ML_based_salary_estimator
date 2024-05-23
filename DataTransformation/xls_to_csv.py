@@ -1,4 +1,5 @@
 import pandas as pd
+import xlsxwriter
  
 dataframe1 = pd.read_excel('2024-yazilim-sektoru-maaslari.xlsx')
 
@@ -71,9 +72,15 @@ print(techSearchList)
 
 
 for techDF in techSearchList:
-    dataframe1.loc[dataframe1["tech_stack"].str.contains(r''+techDF+'', na=False), techDF] = True
-    dataframe1.loc[dataframe1["tech_stack"].str.contains(r''+techDF+'', na=False) == False, techDF] = False
+    dataframe1.loc[dataframe1["tech_stack"].str.contains(r''+techDF+'', na=False), techDF] = int(1)
+    dataframe1.loc[dataframe1["tech_stack"].str.contains(r''+techDF+'', na=False) == False, techDF] = int(0)
 
 
 print(dataframe1[30:50])
 # mess ends---------------------------------------------------------------------
+
+
+file_path = 'output.xlsx'
+
+# Write the DataFrame to an Excel file
+dataframe1.to_excel(file_path, index=False)
