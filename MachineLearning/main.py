@@ -1,64 +1,53 @@
-#train and test the data using regression model
 import pandas as pd
-import numpy as np
-import os
-import joblib
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import r2_score
-from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # Load the data
 data = pd.read_csv('../DataTransformation/last_final_data.csv')
 
+# Preprocessing
+# Check for missing values
+print(data.isnull().sum())
 
-# Instantiate the encoder
-le = LabelEncoder()
+# Encode categorical variables
+categorical_features = ['city', 'company_size', 'position', 'level', 'office', 'hybrid', 'remote']
+numerical_features = ['experience', 'raise_period', 'JavaScript / TypeScript and related frameworks',
+                      'C# / .NET', 'Java and related frameworks', 'Python', 'PHP', 'C, C++', 
+                      'Kotlin', 'Swift', 'Golang', 'Flutter']
 
-# Iterate over all the values of each column and extract their dtypes
-for col in data.columns:
-    # Compare if the dtype is object
-    if data[col].dtype=='object':
-    # Use LabelEncoder to do the numeric transformation
-        data[col]=le.fit_transform(data[col])
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', StandardScaler(), numerical_features),
+        ('cat', OneHotEncoder(), categorical_features)
+    ])
 
-X = data.iloc[:, :-1].values
-Y = data.iloc[:, -1].values
+# Split the data into features and target
+X = data.drop('mean_salary', axis=1)
+y = data['mean_salary']
 
-# Split the dataset into 80% training and 20% testing
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Use the Linear Regression model
-regressor = LinearRegression()
-regressor.fit(X_train, Y_train)
+# Create the model pipeline
+model = Pipeline(steps=[
+    ('preprocessor', preprocessor),
+    ('regressor', RandomForestRegressor(random_state=42))
+])
 
-# Get the predictions
-Y_pred = regressor.predict(X_test)
+# Train the model
+model.fit(X_train, y_train)
 
-# Get the R-Squared
-r2 = r2_score(Y_test, Y_pred)
+# Predict and evaluate
+y_pred = model.predict(X_test)
+print('MAE:', mean_absolute_error(y_test, y_pred))
+print('MSE:', mean_squared_error(y_test, y_pred))
+print('R2:', r2_score(y_test, y_pred))
 
-# Get the Mean Squared Error
-mse = mean_squared_error(Y_test, Y_pred)
-print("Mean Squared Error: ", mse)
-
-# Get the Mean Absolute Error
-mae = mean_absolute_error(Y_test, Y_pred)
-print("Mean Absolute Error: ", mae)
-
-
-# Ensure the directory exists
-if not os.path.exists('MachineLearning'):
-    os.makedirs('MachineLearning')
 
 # Save the model
-
-joblib.dump(regressor, 'MachineLearning/model.pkl')
-print("Model has been saved as model.pkl")
-
-# Save the data columns
-model_columns = list(data.columns)
-joblib.dump(model_columns, 'MachineLearning/model_columns.pkl')
-print("Model columns have been saved as model_columns.pkl")
+import joblib
+joblib.dump(model, 'model.pkl')
