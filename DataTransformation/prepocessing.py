@@ -244,8 +244,14 @@ print(missing_positions)
 
 dataframe1['position'] = dataframe1['position'].map(title_mapping)
 
-
-
-
 #after the data preprocessing save the data as a new csv file
 dataframe1.to_csv('final_data.csv', index=False)
+
+
+#add combined.csv data to final_data.csv as new columns
+combined_data = pd.read_csv('combined.csv')
+final_data = pd.read_csv('final_data.csv')
+
+final_data = pd.concat([final_data, combined_data], axis=1)
+final_data.to_csv('last_final_data.csv', index=False)
+
