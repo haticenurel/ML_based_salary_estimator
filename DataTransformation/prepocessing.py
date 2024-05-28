@@ -23,6 +23,7 @@ dataframe1.loc[dataframe1["level"] == "Junior", "level"] = 1
 dataframe1.loc[dataframe1["level"] == "Middle", "level"] = 2
 dataframe1.loc[dataframe1["level"] == "Mid", "level"] = 2
 dataframe1.loc[dataframe1["level"] == "Senior", "level"] = 3
+dataframe1.loc[dataframe1["level"] == "Staff", "level"] = 4
 
 dataframe1.loc[dataframe1["experience"] == "0 - 1 Yıl", "experience"] = 1
 dataframe1.loc[dataframe1["experience"] == "0-1 Yıl", "experience"] = 1
