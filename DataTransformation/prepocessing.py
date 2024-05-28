@@ -265,4 +265,10 @@ print(final_data['raise_period'].isnull().sum())
 final_data.loc[final_data['raise_period'].isnull(), 'raise_period'] = 0
 print(final_data['raise_period'].isnull().sum())
 
+#check if there is any missing value in position column and fill it with Uncategorized / Other
+print(final_data['position'].isnull().sum())
+final_data.loc[final_data['position'].isnull(), 'position'] = 'Uncategorized / Other'
+print(final_data['position'].isnull().sum())
+
+
 final_data.to_csv('last_final_data.csv', index=False)

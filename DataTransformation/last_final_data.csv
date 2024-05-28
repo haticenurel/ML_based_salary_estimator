@@ -9462,7 +9462,7 @@ city,company_size,position,level,experience,raise_period,office,hybrid,remote,me
 0,1,Backend Development,3,4,2.0,no,no,yes,3493,0,0,1,0,0,0,0,0,0,0
 0,1,Backend Development,3,8,2.0,no,no,yes,1878,0,1,0,0,0,0,0,0,0,0
 1,1,Full Stack Development,2,2,2.0,no,no,yes,2096,0,0,1,0,0,0,0,0,0,0
-0,1,,2,2,1.0,no,no,yes,1878,1,0,1,0,0,0,0,0,0,0
+0,1,Uncategorized / Other,2,2,1.0,no,no,yes,1878,1,0,1,0,0,0,0,0,0,0
 0,1,Full Stack Development,2,3,1.0,no,no,yes,4890,0,0,0,1,0,1,0,0,0,0
 0,1,Backend Development,1,2,1.0,no,no,yes,1629,0,0,1,0,0,0,0,0,0,0
 0,1,Mobile Development,2,4,2.0,no,no,yes,3338,0,0,0,0,0,0,1,0,0,0
