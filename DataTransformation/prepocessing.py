@@ -33,6 +33,7 @@ dataframe1.loc[dataframe1["experience"] == "3-5 Yıl", "experience"] = 3
 dataframe1.loc[dataframe1["experience"] == "3 - 5 Yıl", "experience"] = 3
 dataframe1.loc[dataframe1["experience"] == "5 - 7 Yıl", "experience"] = 4
 dataframe1.loc[dataframe1["experience"] == "5-7 Yıl", "experience"] = 4
+dataframe1.loc[dataframe1["experience"] == "5-9 Yıl", "experience"] = 4
 dataframe1.loc[dataframe1["experience"] == "7-9 Yıl", "experience"] = 5
 dataframe1.loc[dataframe1["experience"] == "7 - 10 Yıl", "experience"] = 5
 dataframe1.loc[dataframe1["experience"] == "10-12 Yıl", "experience"] = 6
