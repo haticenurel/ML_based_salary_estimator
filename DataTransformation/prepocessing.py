@@ -258,7 +258,7 @@ final_data = pd.concat([final_data, combined_data], axis=1)
 final_data.to_csv('last_final_data.csv', index=False)
 
 #check if there is any missing value in the final data
-print(final_data.isnull().sum())
+#print(final_data.isnull().sum())
 
 #check if there is any missing value in raise_period column and fill it with 0
 print(final_data['raise_period'].isnull().sum())
@@ -270,5 +270,6 @@ print(final_data['position'].isnull().sum())
 final_data.loc[final_data['position'].isnull(), 'position'] = 'Uncategorized / Other'
 print(final_data['position'].isnull().sum())
 
+print(final_data.isnull().sum())
 
 final_data.to_csv('last_final_data.csv', index=False)
