@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -49,3 +50,13 @@ r2 = r2_score(y_test, y_pred)
 print(f"MAE: {mae}")
 print(f"MSE: {mse}")
 print(f"R2: {r2}")
+
+# Plot actual vs. predicted values
+plt.figure(figsize=(8, 6))
+plt.scatter(y_test, y_pred, color='b', alpha=0.5)
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color='r', linestyle='--')
+plt.xlabel("Actual Values (y_Actual)")
+plt.ylabel("Predicted Values (y_Predicted)")
+plt.title("Actual vs. Predicted Values (Random Forest Regression)")
+plt.grid(True)
+plt.show()
