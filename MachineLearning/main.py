@@ -40,7 +40,6 @@ print(Mean_absolute_Error)
 print(X_test.shape)
 print(y_pred_lr.shape)
 
-import matplotlib.pyplot as plt
 
 plt.figure(figsize=(8, 6))
 plt.scatter(Y_test, y_pred_lr, color='b', alpha=0.5)
