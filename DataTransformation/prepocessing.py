@@ -273,3 +273,12 @@ print(final_data['position'].isnull().sum())
 print(final_data.isnull().sum())
 
 final_data.to_csv('last_final_data.csv', index=False)
+
+#check  the mean salary that is bigger than 10000 and print the position and mean salary
+print(final_data[final_data['mean_salary'] > 10000][['position', 'mean_salary']])
+
+#remove the rows that have mean salary bigger than 10000
+final_data = final_data[final_data['mean_salary'] <= 10000]
+final_data.to_csv('last_final_data_below.csv', index=False)
+
+
